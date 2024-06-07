@@ -77,7 +77,8 @@ in
 
   nix.settings.trusted-users = [ "paul" ];
 
-  nix.nixPath = [ "nixpkgs=${pinned-nixpkgs}" ];
+  nix.nixPath = [ "nixpkgs=${pinned-nixpkgs}:nixos-config=none" ];
 
+  # Should be updated to match your installation
   system.stateVersion = "23.11";
 }

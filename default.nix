@@ -16,7 +16,7 @@ let
     (import "${pinned-nixpkgs}/nixos" {
       configuration = "${configuration}";
       system = "aarch64-linux";
-    }).config.system.build.toplevel;
+    }).config.system.build.nixos-rebuild;
 
   # Script that switches to the new configuration.
   rebuild-command = pkgs.writeShellScript "switch" ''
