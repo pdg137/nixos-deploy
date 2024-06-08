@@ -1,12 +1,12 @@
 let
-  # our current system pkgs
-  pkgs = (import <nixpkgs> {}).pkgs;
-
   # Nixpkgs version to use for building the profile (nixos-24.11 branch on 2024-06-06)
   pinned-nixpkgs = fetchTarball {
     sha256 = "sha256:1rzdqgs00vzw69m569li3c6yvkdlqf7zihiivi4n83lfqginr7ar";
     url = "https://github.com/NixOS/nixpkgs/archive/0b8e7a1ae5a94da2e1ee3f3030a32020f6254105.tar.gz";
   };
+
+  # Evaluate pkgs for local system.
+  pkgs = (import pinned-nixpkgs { }).pkgs;
 
   # Our configuration
   configuration = ./configuration.nix;
@@ -16,7 +16,7 @@ let
     (import "${pinned-nixpkgs}/nixos" {
       configuration = "${configuration}";
       system = "aarch64-linux";
-    }).config.system.build.nixos-rebuild;
+    }).config.system.build.toplevel;
 
   # Script that switches to the new configuration.
   rebuild-command = pkgs.writeShellScript "switch" ''

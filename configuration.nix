@@ -10,7 +10,8 @@ let
     url = "https://github.com/NixOS/nixpkgs/archive/0b8e7a1ae5a94da2e1ee3f3030a32020f6254105.tar.gz";
   };
 
-  pkgs = (import pinned-nixpkgs { });
+  # Evalute pkgs for Raspberry Pi.
+  pkgs = (import pinned-nixpkgs { system = "aarch64-linux"; }).pkgs;
 
   # Enable Raspberry Pi specific options under hardware.raspberry-pi."4"
   # This is the master branch on 2024-06-06.
